@@ -1,0 +1,164 @@
+_type: export
+__export_format: 4
+__export_date: 2023-02-27T22:48:08.802Z
+__export_source: insomnia.desktop.app:v2022.4.2
+resources:
+  - _id: req_a451ebfc28b242c39cb393651b878fae
+    parentId: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    modified: 1677538068506
+    created: 1677496775852
+    url: http://localhost:3001/devices/63fc13c7b817f1ef5af52631
+    name: updateDevice
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"humidity": "50%",
+        	"name": "teste2"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c57f4cb787ff458986aefe0a571cccb0
+    authentication: {}
+    metaSortKey: -1677496775852
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    parentId: null
+    modified: 1677345812377
+    created: 1677345812377
+    name: device-manager
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_d39619c0e3b945c1b5ee889502024016
+    parentId: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    modified: 1677496752683
+    created: 1677496692088
+    url: http://localhost:3001/devices/63fc13c7b817f1ef5af52631
+    name: getDevice
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1677496692088
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e0ef2690f38040c8b249cfbed0f2f4ee
+    parentId: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    modified: 1677496733396
+    created: 1677494673045
+    url: http://localhost:3001/devices/
+    name: getAllDevices
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1677495783748
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b80b1f7c57b647aab0a306bffc8528ff
+    parentId: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    modified: 1677538062825
+    created: 1677345815171
+    url: http://localhost:3001/devices
+    name: createDevice
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "teste",
+        	"temperature": "50°C",
+        	"luminosity": "100lm",
+        	"humidity": "50%"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_dd10a0dccb754807b1a2f3cb82e25c92
+    authentication: {}
+    metaSortKey: -1677495329578
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_febe1a77a55342b898f123b1219ab4f3
+    parentId: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    modified: 1677496687915
+    created: 1677494875408
+    url: http://localhost:3001/devices/63fc13bfb817f1ef5af5262f
+    name: removeDevice
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1677494875408
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_3c933bbc8077e36cb3af7fe5ea071965ed8fb738
+    parentId: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    modified: 1677345812385
+    created: 1677345812385
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1677345812385
+    _type: environment
+  - _id: jar_3c933bbc8077e36cb3af7fe5ea071965ed8fb738
+    parentId: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    modified: 1677345812385
+    created: 1677345812385
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_d7b3b7e0d9db406e8edbe99914c3e7a3
+    parentId: wrk_32daf631b7f74e3fbbdb1d53d0931094
+    modified: 1677345812383
+    created: 1677345812383
+    fileName: device-manager
+    contents: ""
+    contentType: yaml
+    _type: api_spec
