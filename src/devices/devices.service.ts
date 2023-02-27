@@ -3,16 +3,20 @@ import { Model } from 'mongoose';
 import { CreateDeviceDto } from './dto/create-device.dto';
 import { UpdateDeviceDto } from './dto/update-device.dto';
 import { Device } from './interfaces/device.interface';
+import { EventsGateway } from '../events/events.gateway';
 
 @Injectable()
 export class DevicesService {
   constructor(
     @Inject('DEVICE_MODEL')
     private deviceModel: Model<Device>,
+    private eventsGateway: EventsGateway,
   ) {}
 
-  create(createDeviceDto: CreateDeviceDto) {
-    return this.deviceModel.create(createDeviceDto);
+  async create(createDeviceDto: CreateDeviceDto) {
+    const newDevice = await this.deviceModel.create(createDeviceDto);
+    this.eventsGateway.onNewDevice(newDevice);
+    return newDevice;
   }
 
   findAll() {
@@ -27,10 +31,11 @@ export class DevicesService {
 
   async update(id: string, updateDeviceDto: UpdateDeviceDto) {
     const device = await this.findOne(id);
-    return this.deviceModel.update(
+    await this.deviceModel.update(
       { _id: device._id },
       { $set: updateDeviceDto },
     );
+    this.eventsGateway.onUpdateDevice(updateDeviceDto);
   }
 
   async remove(id: string) {
