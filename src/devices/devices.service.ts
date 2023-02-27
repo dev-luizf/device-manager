@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { CreateDeviceDto } from './dto/create-device.dto';
 import { UpdateDeviceDto } from './dto/update-device.dto';
@@ -16,18 +16,22 @@ export class DevicesService {
   }
 
   findAll() {
-    return `This action returns all devices`;
+    return this.deviceModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} device`;
+  async findOne(id: string) {
+    const device = await this.deviceModel.findById(id).exec();
+    if (!device) throw new NotFoundException('device not found');
+    return device;
   }
 
-  update(id: number, updateDeviceDto: UpdateDeviceDto) {
-    return `This action updates a #${id} device`;
+  async update(id: string, updateDeviceDto: UpdateDeviceDto) {
+    const device = await this.findOne(id);
+    return this.deviceModel.update({ _id: device._id }, { $set: updateDeviceDto});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} device`;
+  async remove(id: string) {
+    const device = await this.findOne(id);
+    return this.deviceModel.remove({ _id: device._id });
   }
 }
