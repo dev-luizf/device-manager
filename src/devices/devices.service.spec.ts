@@ -100,7 +100,9 @@ describe('DevicesService', () => {
 
     it('deve atualizar um dispositivo', async () => {
       jest.spyOn(mockDeviceModel, 'update').mockResolvedValue(null);
-      await expect(devicesService.update(device._id, { name: 'novo nome' })).resolves.not.toThrow()
+      await expect(
+        devicesService.update(device._id, { name: 'novo nome' }),
+      ).resolves.not.toThrow();
     });
 
     it('deve lançar um erro se o dispositivo não for encontrado', async () => {
@@ -119,7 +121,9 @@ describe('DevicesService', () => {
   describe('remove', () => {
     it('deve remover um dispositivo', async () => {
       jest.spyOn(mockDeviceModel, 'remove').mockResolvedValue(null);
-      await expect(devicesService.remove(devicesList[0]._id)).resolves.not.toThrow()
+      await expect(
+        devicesService.remove(devicesList[0]._id),
+      ).resolves.not.toThrow();
     });
 
     it('deve lançar um erro se o dispositivo não for encontrado', async () => {

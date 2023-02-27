@@ -5,7 +5,7 @@ import { DevicesController } from './devices.controller';
 import { DevicesService } from './devices.service';
 import { Device } from './interfaces/device.interface';
 
-const newDevice =   {
+const newDevice = {
   name: 'dipositivo 1',
   temperature: '50°C',
   luminosity: '10lux',
@@ -16,7 +16,7 @@ const devicesList = [
   {
     ...newDevice,
     _id: '63fc13c7b817f1ef5af52631',
-    _v: 0
+    _v: 0,
   },
   {
     _id: '63fc13c8b817f1ef5af52633',
@@ -26,10 +26,10 @@ const devicesList = [
     humidity: '80%',
     __v: 0,
   },
-] as (Device & { _id: ObjectId; })[];
+] as (Device & { _id: ObjectId })[];
 
-const invalidIdError = "id is invalid"
-const requiredIdError = "id is required"
+const invalidIdError = 'id is invalid';
+const requiredIdError = 'id is required';
 
 describe('DevicesController', () => {
   let controller: DevicesController;
@@ -38,16 +38,18 @@ describe('DevicesController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [DevicesController],
-      providers: [{
-        provide: DevicesService,
-        useValue: {
-          create: jest.fn(),
-          findAll: jest.fn(),
-          findOne: jest.fn(),
-          update: jest.fn(),
-          remove: jest.fn(),
+      providers: [
+        {
+          provide: DevicesService,
+          useValue: {
+            create: jest.fn(),
+            findAll: jest.fn(),
+            findOne: jest.fn(),
+            update: jest.fn(),
+            remove: jest.fn(),
+          },
         },
-      }],
+      ],
     }).compile();
 
     controller = module.get<DevicesController>(DevicesController);
@@ -64,7 +66,9 @@ describe('DevicesController', () => {
   describe('findOne', () => {
     it('deve retornar o dispositivo especificado', async () => {
       jest.spyOn(service, 'findOne').mockResolvedValue(devicesList[0]);
-      expect(await controller.findOne('63fc13c7b817f1ef5af52631')).toEqual(devicesList[0]);
+      expect(await controller.findOne('63fc13c7b817f1ef5af52631')).toEqual(
+        devicesList[0],
+      );
     });
 
     it('deve retornar um erro se o id não for valido', async () => {
@@ -98,7 +102,7 @@ describe('DevicesController', () => {
         await controller.create({} as Device);
       } catch (error) {
         expect(error).toBeInstanceOf(BadRequestException);
-        expect(error.response.error).toEqual("Bad Request");
+        expect(error.response.error).toEqual('Bad Request');
       }
     });
   });
@@ -106,7 +110,9 @@ describe('DevicesController', () => {
   describe('delete', () => {
     it('deve excluir um dispositivo existente', async () => {
       jest.spyOn(service, 'remove').mockResolvedValue({ deletedCount: 1 });
-      await expect(controller.remove('63fc13c7b817f1ef5af52631')).resolves.not.toThrow();
+      await expect(
+        controller.remove('63fc13c7b817f1ef5af52631'),
+      ).resolves.not.toThrow();
     });
 
     it('deve retornar um erro se o id não for valido', async () => {
@@ -128,5 +134,4 @@ describe('DevicesController', () => {
       }
     });
   });
-
 });
