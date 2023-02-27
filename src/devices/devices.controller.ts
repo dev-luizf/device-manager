@@ -1,5 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException } from '@nestjs/common';
-import { joiCreateDeviceSchema, joiUpdateDeviceSchema } from 'src/joi_schemas/device.joischema';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  BadRequestException,
+} from '@nestjs/common';
+import {
+  joiCreateDeviceSchema,
+  joiUpdateDeviceSchema,
+} from 'src/joi_schemas/device.joischema';
 import { joiValidate } from 'src/utils/joiValidate';
 import { DevicesService } from './devices.service';
 import { CreateDeviceDto } from './dto/create-device.dto';
@@ -8,7 +20,7 @@ import { UpdateDeviceDto } from './dto/update-device.dto';
 @Controller('devices')
 export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {}
-  
+
   validateId(id: string) {
     if (!id) throw new BadRequestException('id is required');
     if (id.length !== 24) throw new BadRequestException('id is invalid');
@@ -16,7 +28,7 @@ export class DevicesController {
 
   @Post()
   create(@Body() createDeviceDto: CreateDeviceDto) {
-    joiValidate(joiCreateDeviceSchema, createDeviceDto)
+    joiValidate(joiCreateDeviceSchema, createDeviceDto);
     return this.devicesService.create(createDeviceDto);
   }
 
@@ -32,9 +44,12 @@ export class DevicesController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateDeviceDto: UpdateDeviceDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateDeviceDto: UpdateDeviceDto,
+  ) {
     this.validateId(id);
-    joiValidate(joiUpdateDeviceSchema, updateDeviceDto)
+    joiValidate(joiUpdateDeviceSchema, updateDeviceDto);
     await this.devicesService.update(id, updateDeviceDto);
   }
 

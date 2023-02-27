@@ -27,7 +27,10 @@ export class DevicesService {
 
   async update(id: string, updateDeviceDto: UpdateDeviceDto) {
     const device = await this.findOne(id);
-    return this.deviceModel.update({ _id: device._id }, { $set: updateDeviceDto});
+    return this.deviceModel.update(
+      { _id: device._id },
+      { $set: updateDeviceDto },
+    );
   }
 
   async remove(id: string) {

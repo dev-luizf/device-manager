@@ -7,6 +7,6 @@ import { devicesProviders } from './device.providers';
 @Module({
   imports: [DatabaseModule],
   controllers: [DevicesController],
-  providers: [DevicesService, ...devicesProviders]
+  providers: [DevicesService, ...devicesProviders],
 })
 export class DevicesModule {}

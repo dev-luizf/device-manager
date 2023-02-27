@@ -43,7 +43,4 @@ const joiUpdateDeviceSchema = Joi.object({
     }),
 });
 
-export {
-  joiCreateDeviceSchema,
-  joiUpdateDeviceSchema,
-};
+export { joiCreateDeviceSchema, joiUpdateDeviceSchema };
