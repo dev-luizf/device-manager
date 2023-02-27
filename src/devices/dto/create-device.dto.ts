@@ -1,6 +1,6 @@
 export class CreateDeviceDto {
   name: string;
-  temperature: number;
+  temperature: string;
   luminosity: string;
   humidity: string;
 }
