@@ -1,73 +1,96 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Device Manager
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Essa API Rest desenvolvida em Nest.js é responsável por gerenciar dispositivos IoT, permitindo a criação, leitura, atualização e remoção de dispositivos. Além disso, a API implementa um Websocket para emitir uma mensagem toda vez que um dispositivo for criado ou atualizado.
 
-## Description
+Os testes foram desenvolvidos utilizando o framework Jest e as validações com a biblioteca Joi. A API foi containerizada utilizando Docker, e o banco de dados utilizado foi o MongoDB com a biblioteca Mongoose.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tecnologias utilizadas
 
-## Installation
+-   [Nest.js](https://nestjs.com/)  - Framework para desenvolvimento de aplicações em Node.js.
+-   [Mongoose](https://mongoosejs.com/)  - ODM para o banco de dados MongoDB.
+-   [Jest](https://jestjs.io/)  - Biblioteca de testes em JavaScript.
+-   [Docker](https://www.docker.com/)  - Plataforma para desenvolvimento, envio e execução de aplicações.
+-   [Websocket](https://developer.mozilla.org/pt-BR/docs/Web/API/WebSocket)  - Protocolo que permite persistir conexões TCP entre o servidor e o cliente.
+-   [Joi](https://joi.dev/)  - Biblioteca para validação de dados.
 
-```bash
-$ npm install
+
+## Como rodar a API
+
+Para rodar a API, você precisará ter o  [Docker](https://www.docker.com/)  instalado na sua máquina. Se preferir, também é possível rodar a aplicação sem ele, basta seguir as instruções na seção "Rodando sem Docker".
+
+1.  Clone o repositório:
+
+`https://github.com/dev-luizf/device-manager.git`
+
+2.  Entre na pasta do projeto:
+
+`cd device-manager`
+
+3.  Crie um arquivo  `.env`  na raiz do projeto com as seguintes variáveis::
+
+```
+MONGO_URI="mongodb://localhost:27017/device-manager"
+
 ```
 
-## Running the app
+5.  Rode o Docker Compose:
 
-```bash
-# development
-$ npm run start
+`npm run compose:up`
 
-# watch mode
-$ npm run start:dev
+4.  Acesse a API em  `http://localhost:3001`.
 
-# production mode
-$ npm run start:prod
-```
+## Rodando sem Docker
 
-## Test
+Se você preferir não utilizar o Docker, siga as instruções abaixo.
 
-```bash
-# unit tests
-$ npm run test
+1.  Clone o repositório:
 
-# e2e tests
-$ npm run test:e2e
+`https://github.com/dev-luizf/device-manager.git`
 
-# test coverage
-$ npm run test:cov
-```
+2.  Entre na pasta do projeto:
 
-## Support
+`cd device-manager`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+3.  Instale as dependências:
 
-## Stay in touch
+`npm install`
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+4.  Crie um arquivo  `.env`  na raiz do projeto com as seguintes variáveis:
 
-## License
+`MONGO_URI="mongodb://localhost:27017/device-manager"`
 
-Nest is [MIT licensed](LICENSE).
+6.  Inicie o servidor:
+
+`npm run start:dev`
+
+7.  Acesse a API em  `http://localhost:3001`.
+
+## Endpoints
+
+### GET /devices
+
+Retorna a lista de todos os dispositivos.
+
+### GET /devices/:id
+
+Retorna as informações de um dispositivo específico.
+
+### POST /devices
+
+Cria um novo dispositivo.
+
+### PUT /devices/:id
+
+Atualiza as informações de um dispositivo existente.
+
+### DELETE /devices/:id
+
+Exclui um dispositivo existente.
+
+
+## Testes
+
+A API possui testes unitários escritos com a biblioteca Jest. Para roda-los, execute o seguinte comando:
+
+`npm run test`
